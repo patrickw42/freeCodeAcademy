@@ -5,13 +5,13 @@ const express = require("express");
 const app = express();
 //const path = require('path');
 
-app.use("/public", express.static(__dirname + "/public"));
-
 //middleware function takes 3 args request result and next function to call. if no next() would infitloop
 app.use(function middleware(req, res, next) {
   res.send(req.method + " " + req.path + " - " + req.ip);
   next();
 });
+
+app.use("/public", express.static(__dirname + "/public"));
 
 //notice can't do __dirname + '/views/index.html' must do '/views/' + 'index.html'
 // also notice ; needed insinde the routeHandler since it is a function(return)
