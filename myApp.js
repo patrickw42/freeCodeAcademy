@@ -3,8 +3,8 @@ let express = require('express');
 let app = express();
 let path = require('path');
 //notice can't do __dirname + '/views/index.html' must do '/views/' + 'index.html'
-app.get("/", function routeHandler(req,res) { res.sendFile(__dirname + '/views/' + 'index.html')});
-app.use(express.static(__dirname + "/public"));
+//app.get("/", function routeHandler(req,res) { res.sendFile(__dirname + '/views/' + 'index.html')});
+app.use(express.static(__dirname + '/public'));
 
 
 
