@@ -13,7 +13,7 @@ app.get("/", function routeHandler(req, res) {
 
 //NOTICE NEED ; AFTER res.json CALL SINCE IT IS CODE IN A CALLBACK FUNCTION
 app.get("/json", function routeHandler(req, res) {
-  if (process.env.MESSAGE_STYLE == uppercase)
+  if (process.env.MESSAGE_STYLE === "uppercase")
     res.json({ message: "HELLO JSON" });
   else res.json({ message: "Hello json" });
 });
