@@ -4,17 +4,25 @@ console.log(process.env);
 const express = require("express");
 const app = express();
 //const path = require('path');
+
 app.use("/public", express.static(__dirname + "/public"));
+
+//middleware function takes 3 args request result and next function to call. if no next() would infitloop
+app.use(function middleware(req, res, next) {
+  res.send(req.method + " " + req.path + " - " + req.ip);
+  next();
+});
 
 //notice can't do __dirname + '/views/index.html' must do '/views/' + 'index.html'
 // also notice ; needed insinde the routeHandler since it is a function(return)
+// when user clicks on home directory (app opened) will return response res sending the html file to browser
 app.get("/", function routeHandler(req, res) {
   res.sendFile(__dirname + "/views/" + "index.html");
 });
 
 //NOTICE NEED ; AFTER res.json CALL SINCE IT IS CODE IN A CALLBACK FUNCTION
 app.get("/json", function routeHandler(req, res) {
-  if (process.env.MESSAGE_STYLE === "uppercase")
+  if (process.env.MESSAGE_STYLE == "uppercase")
     res.json({ message: "HELLO JSON" });
   res.json({ message: "Hello json" });
 });
