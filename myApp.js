@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config();
 console.log(process.env);
 const express = require("express");
 const app = express();
@@ -13,10 +13,10 @@ app.get("/", function routeHandler(req, res) {
 
 //NOTICE NEED ; AFTER res.json CALL SINCE IT IS CODE IN A CALLBACK FUNCTION
 //app.get("/json", function routeHandler(req, res) {
-// if (process.env.MESSAGE_STYLE === "uppercase")
-//   res.json({ message: "HELLO JSON" });
-// else
-//    res.json({ message: "Hello json" });
-//});
+ if (process.env.MESSAGE_STYLE === "uppercase")
+   res.json({ message: "HELLO JSON" });
+ else
+    res.json({ message: "Hello json" });
+});
 
 module.exports = app;
