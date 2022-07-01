@@ -1,6 +1,5 @@
 //must be single quotes which is odd
 require("dotenv").config();
-
 console.log(process.env);
 const express = require("express");
 const app = express();
