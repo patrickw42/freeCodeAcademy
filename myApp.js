@@ -6,11 +6,12 @@ const app = express();
 //const path = require('path');
 
 //middleware function takes 3 args request result and next function to call. if no next() would infitloop
-app.use(function middleware(req, res, next) {
-  console.log(req.method + " " + req.path + " - " + req.ip);
+app.use((req, res, next) => {
+  console.log(req.method, " ", req.path, " - ", req.ip);
   next();
 });
 
+//sets the public directory so we can access with relative path
 app.use("/public", express.static(__dirname + "/public"));
 
 //notice can't do __dirname + '/views/index.html' must do '/views/' + 'index.html'
