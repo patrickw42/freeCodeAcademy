@@ -39,7 +39,7 @@ app.get("/:word/echo", (req, res) => {
 });
 
 //can also match query string entered by user. if they enter /pat/walker will return
-app.get("/name", (res, req) => {
+app.get("/name", (req, res) => {
   res.json({ name: `req.query.first + " " + req.query.last` });
 });
 
