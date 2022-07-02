@@ -38,9 +38,11 @@ app.get("/:word/echo", (req, res) => {
   res.json({ echo: req.params.word });
 });
 
-//can also match query string entered by user. if they enter /pat/walker will return
+//can also match query string entered by user. after /name
+//if they enter '/name?last=Walker&first=Pat' will return {name: Pat Walker} destucturing using backticks
+// and wrapping variables in ${}
 app.get("/name", (req, res) => {
-  res.json({ name: `req.query.first + " " + req.query.last` });
+  res.json({ name: `${req.query.first} + " " + ${req.query.last}` });
 });
 
 //notice can't do __dirname + '/views/index.html' must do '/views/' + 'index.html'
