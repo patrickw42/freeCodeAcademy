@@ -6,15 +6,21 @@ const app = express();
 //const path = require('path');
 
 //middleware function takes 3 args request result and next function to call. if no next() would infitloop
-//app.use((req, res, next) => {
-//  console.log("req.method+ ’ ‘+req.path+’-’+req.ip");
-//  next();
-//});
-
 app.use((req, res, next) => {
   console.log(req.method + " " + req.path + " - " + req.ip);
   next();
 });
+
+//chained middleware. sets res.time as string rep of current time and responds with object {time:res.time}
+app.get(
+  "/now",
+  (req, res, next) => {
+    res.time = new Date().toString();
+  },
+  function (res, req) {
+    res.send({ time: req.time });
+  }
+);
 
 //sets the public directory so we can access with relative path
 app.use("/public", express.static(__dirname + "/public"));
