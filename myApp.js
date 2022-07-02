@@ -42,7 +42,9 @@ app.get("/:word/echo", (req, res) => {
 //if they enter '/name?last=Walker&first=Pat' will return {name: Pat Walker} destucturing using backticks
 // and wrapping variables in ${}
 app.get("/name", (req, res) => {
-  res.json({ name: `${req.query.first} + " " + ${req.query.last}` });
+  let firstName = req.query.first;
+  let lastName = req.query.last;
+  res.json({ name: `${firstName} + " " + ${lastName}` });
 });
 
 //notice can't do __dirname + '/views/index.html' must do '/views/' + 'index.html'
