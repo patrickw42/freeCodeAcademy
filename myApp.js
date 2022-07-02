@@ -27,7 +27,9 @@ app.get(
 );
 
 //use route params to match the route and return new json obj with {2:3} after path root/2/3 entered in url
-app.get("/:word/echo"), (req, res) => { res.json({ echo: word }) });
+app.get("/:word/echo", (req, res) => {
+  res.json({ echo: word });
+});
 
 //sets the public directory so we can access with relative path
 app.use("/public", express.static(__dirname + "/public"));
