@@ -18,7 +18,7 @@ app.get(
     req.time = new Date().toString();
     next();
   },
-  function routeHandler(res, req) {
+  (req, res) => {
     res.send({ time: req.time });
   }
 );
