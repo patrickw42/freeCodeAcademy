@@ -44,7 +44,7 @@ app.get("/:word/echo", (req, res) => {
 app.get("/name", (req, res) => {
   let firstName = req.query.first;
   let lastName = req.query.last;
-  res.json({ name: `${firstName} + " " + ${lastName}` });
+  res.json({ name: `${firstName} ${lastName}` });
 });
 
 //notice can't do __dirname + '/views/index.html' must do '/views/' + 'index.html'
