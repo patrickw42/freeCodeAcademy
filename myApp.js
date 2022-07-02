@@ -6,8 +6,13 @@ const app = express();
 //const path = require('path');
 
 //middleware function takes 3 args request result and next function to call. if no next() would infitloop
+//app.use((req, res, next) => {
+//  console.log("req.method+ ’ ‘+req.path+’-’+req.ip");
+//  next();
+//});
+
 app.use((req, res, next) => {
-  console.log("req.method+ ’ ‘+req.path+’-’+req.ip");
+  console.log("req.method+ ’ ‘+req.path+’-’+req.ip ");
   next();
 });
 
