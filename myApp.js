@@ -38,9 +38,9 @@ app.get("/:word/echo", (req, res) => {
   res.json({ echo: req.params.word });
 });
 
-//can also match query string entered by user.
-app.get("/name?first=firstname&last=lastname", (res, req) => {
-  res.json({ name: req.params.firstname + " " + req.params.lastname });
+//can also match query string entered by user. if they enter /pat/walker will return
+app.get("/name", (res, req) => {
+  res.json({ name: `req.query.first + " " + req.query.last` });
 });
 
 //notice can't do __dirname + '/views/index.html' must do '/views/' + 'index.html'
