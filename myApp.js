@@ -11,13 +11,16 @@ app.use((req, res, next) => {
   next();
 });
 
-//chained middleware. sets res.time as string rep of current time and responds with object {time:res.time}
+//chained middleware can just pass them one after the other to the app.get/use/put method. sets res.time
+// as string of current time in first one and responds with object { time: res.time } in 2nd one
 app.get(
   "/now",
   (req, res, next) => {
     req.time = new Date().toString();
     next();
   },
+  //2nd middleware function responds with object {time:req.time} that was set in first middleware function
+  // notice doesn't have next...
   (req, res) => {
     res.send({ time: req.time });
   }
