@@ -27,8 +27,10 @@ app.get(
 );
 
 //use route params to match the route and return new json obj with {2:3} after path root/2/3 entered in url
+// if we want to save to req.params must have a : before it. will save :word after first /, but not echo
+// after 2nd backslash /
 app.get("/:word/echo", (req, res) => {
-  res.json({ echo: word });
+  res.json({ echo: req.params.word });
 });
 
 //sets the public directory so we can access with relative path
