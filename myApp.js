@@ -12,7 +12,10 @@ const app = express();
 //});
 
 app.use((req, res, next) => {
-  console.log("req.method+ ’ ‘+req.path+’-’+req.ip ");
+  let clientIP = req.ip;
+  let clientMethod = req.method;
+  let clientPath = req.path;
+  console.log(clientMethod + " " + clientPath + " - " + clientIP);
   next();
 });
 
