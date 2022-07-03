@@ -9,7 +9,7 @@ const app = express();
 //for parsing urlencoded post requests. when extened = false object returned doesn't inherit from object
 // values can only be strings or arrays.when extended = true more flexable and data outmatched by json
 const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //middleware function takes 3 args request result and next function to call. if no next() would infitloop
 app.use((req, res, next) => {
