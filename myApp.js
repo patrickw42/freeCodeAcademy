@@ -50,7 +50,7 @@ app.get("/:word/echo", (req, res) => {
 app.get("/name", (req, res) => {
   let firstName = req.query.first;
   let lastName = req.query.last;
-  res.json({ name: `${firstName} ${lastName}` });
+  res.json({ name: `${req.query.first} ${lastName}` });
 });
 
 //notice can't do __dirname + '/views/index.html' must do '/views/' + 'index.html'
@@ -72,8 +72,9 @@ app.get("/json", function routeHandler(req, res) {
 
 //body-parser allows us to return url encoded values from the form in index.html (since method is post
 //and it's action is '/name'). Form values are stored in req.body matching the <input> element's name propert
+// not working with backticks and `${}` need to concat with string space
 app.post("/name", function (req, res) {
-  res.json({ name: `${req.body.first} ${req.body.last}` });
+  res.json({ name: req.body.first + " " + req.body.last });
 });
 
 module.exports = app;
