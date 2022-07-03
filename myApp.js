@@ -20,6 +20,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //middleware function takes 3 args request result and next function to call. if no next() would infitloop
 // middlewear functions must be passed to app.use() with optional first arg as path where it is mounted to
 // if no first arg path will mount to root and work for whole app (all routes within)
+//this will log the method path and id of each http request that app handles. The req request object has
+// a method field which is "GET" "POST" "PUT" etc., a path field holding the location in app and ip
+// holding client ip
 app.use((req, res, next) => {
   console.log(req.method + " " + req.path + " - " + req.ip);
   next();
@@ -54,15 +57,15 @@ app.get("/:word/echo", (req, res) => {
   res.json({ echo: req.params.word });
 });
 
-//can also match query string entered by user. after /name
+//can also match query string entered by user after "/name"
 //if they enter '/name?last=Walker&first=Pat' will return {name: Pat Walker} destucturing using backticks
-// and wrapping variables in ${}.
+// and wrapping variables in ${}. The query string variables set in url held in rep.query
 app.get("/name", (req, res) => {
   res.json({ name: `${req.query.first} ${req.query.last}` });
 });
 
 //notice can't do __dirname + '/views/index.html' must do '/views/' + 'index.html'
-// also notice ; needed insinde the routeHandler since it is a function(return)
+// also notice ; needed inside the routeHandler since it is a function(return)
 // when user clicks on home directory (app opened) will return response res sending the html file to browser
 app.get("/", function routeHandler(req, res) {
   res.sendFile(__dirname + "/views/" + "index.html");
@@ -72,15 +75,17 @@ app.get("/", function routeHandler(req, res) {
 // string representation of json object passed to it. Notice uppercase needs quotes since in .env file
 // and isn't declared with const or let. Values stored in .env are stored as strings even though quotes
 // not used in their assignment in the .env file
+// when user clicks on '/json' within app will return "hello jason" or "HELLO JASON" depending on state
+// of MESSAGE_STYLE in the .env file
 app.get("/json", function routeHandler(req, res) {
   if (process.env.MESSAGE_STYLE == "uppercase")
     res.json({ message: "HELLO JSON" });
   res.json({ message: "Hello json" });
 });
 
-//body-parser allows us to return url encoded values from the form in index.html (since method is post
-//and it's action is '/name'). Form values are stored in req.body matching the <input> element's name propert
-// not working with backticks and `${}` need to concat with string space
+//body-parser allows us to return url encoded values from the form element in index.html (since prop method
+//is post and it's action is '/name'). Form values are stored in req.body matching the <input> element's
+// name property
 app.post("/name", function (req, res) {
   res.json({ name: `${req.body.first} ${req.body.last}` });
 });
