@@ -71,7 +71,8 @@ app.get("/json", function routeHandler(req, res) {
 });
 
 app.put("/name", function (req, res) {
-  //let firstName = req.body.firstName
-  res.json({ name: `req.body.firstName req.body.lastName` });
+  let firstName = req.body.first;
+  let lastName = re.body.last;
+  res.json({ name: firstName + " " + lastName });
 });
 module.exports = app;
