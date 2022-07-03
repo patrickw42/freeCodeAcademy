@@ -1,24 +1,34 @@
-//must be single quotes which is odd
-//so we can access out .env file/variables
+/*
+freeCodeCamp Basic Node BackendAPIs Course: SHOWS HOW TO USE EXPRESS TO BUILD HTTP SERVER AND DO
+SOME HTTP CRUD METHODS INCLUDING GET(RETURN A RESOURCE), PUT(UPDATE RESOURCE), POST(CREATE NEW RESOURCE),
+DELETE (NOT USED), AND USE WHICH MOUNTS OR PUTS THE SPECIFIED MIDDLEWEAR FUNCTIONS AT SPECIFIED PATH.
+BESIDES GET AND USE ALL THE OTHERS INCLUDE A PAYLOAD FOUND IN THE req.body.
+*/
+
+//so we can access out .env file/variables using "process.env.xxxxx" to access it's property xxxxxx
 require("dotenv").config();
 
-//require express and save in app
+//require express and save in app field
 const express = require("express");
 const app = express();
 
-//for parsing urlencoded post requests. when extened = false object returned doesn't inherit from object
-// values can only be strings or arrays.when extended = true more flexable and data outmatched by json
+//Needed for parsing urlencoded post requests. when extended = false object returned doesn't inherit from
+//Object class can only be strings or arrays.when extended = true more flexable and data outmatched by json
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //middleware function takes 3 args request result and next function to call. if no next() would infitloop
+// middlewear functions must be passed to app.use() with optional first arg as path where it is mounted to
+// if no first arg path will mount to root and work for whole app (all routes within)
 app.use((req, res, next) => {
   console.log(req.method + " " + req.path + " - " + req.ip);
   next();
 });
 
 //sets the public directory so it can be accessed by anything in the root directory of the app.
-// Makes css work when accessed from html file in root folder.
+// Makes css work when accessed from html file in /views folder (directly as /public/styles.css w/o
+// having to back out like ../public/styles   since /views and /public both in root dir / ).
+// Notice passing express.static() to an instance of express() saved in app
 app.use("/public", express.static(__dirname + "/public"));
 
 //chained middleware can just pass them one after the other to the app.get/use/put method. sets res.time
@@ -30,7 +40,7 @@ app.get(
     next();
   },
   //2nd middleware function responds with object {time:req.time} that was set in first middleware function
-  // notice doesn't have next...
+  // notice doesn't have next...might be because it responds with res.send()
   (req, res) => {
     res.send({ time: req.time });
   }
@@ -46,9 +56,9 @@ app.get("/:word/echo", (req, res) => {
 
 //can also match query string entered by user. after /name
 //if they enter '/name?last=Walker&first=Pat' will return {name: Pat Walker} destucturing using backticks
-// and wrapping variables in ${}. however as you see below this won't work with post and req.body
+// and wrapping variables in ${}.
 app.get("/name", (req, res) => {
-  res.json({ name: `${req.query.first} ${req.query.first}` });
+  res.json({ name: `${req.query.first} ${req.query.last}` });
 });
 
 //notice can't do __dirname + '/views/index.html' must do '/views/' + 'index.html'
