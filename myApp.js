@@ -70,9 +70,10 @@ app.get("/json", function routeHandler(req, res) {
   res.json({ message: "Hello json" });
 });
 
+//body-parser allows us to return url encoded values from the form in index.html (since method is post
+//and it's action is '/name'). Form values are stored in req.body matching the <input> element's name propert
 app.put("/name", function (req, res) {
-  let firstName = req.body.first;
-  let lastName = re.body.last;
-  res.json({ name: firstName + " " + lastName });
+  res.json({ name: req.body.first + " " + req.body.last });
 });
+
 module.exports = app;
