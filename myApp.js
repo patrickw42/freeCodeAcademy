@@ -72,7 +72,7 @@ app.get("/json", function routeHandler(req, res) {
 //and it's action is '/name'). Form values are stored in req.body matching the <input> element's name propert
 // not working with backticks and `${}` need to concat with string space
 app.post("/name", function (req, res) {
-  res.json({ name: req.body.first + " " + req.body.last });
+  res.json({ name: `${req.body.first} ${req.body.last}` });
 });
 
 module.exports = app;
