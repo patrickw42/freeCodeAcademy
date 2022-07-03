@@ -1,9 +1,14 @@
 //must be single quotes which is odd
+//so we can access out .env file/variables
 require("dotenv").config();
-console.log(process.env);
+
+//require express and save in app
 const express = require("express");
 const app = express();
-//const path = require('path');
+
+//for parsing post requests
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //middleware function takes 3 args request result and next function to call. if no next() would infitloop
 app.use((req, res, next) => {
