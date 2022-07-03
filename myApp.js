@@ -46,11 +46,9 @@ app.get("/:word/echo", (req, res) => {
 
 //can also match query string entered by user. after /name
 //if they enter '/name?last=Walker&first=Pat' will return {name: Pat Walker} destucturing using backticks
-// and wrapping variables in ${}
+// and wrapping variables in ${}. however as you see below this won't work with post and req.body
 app.get("/name", (req, res) => {
-  let firstName = req.query.first;
-  let lastName = req.query.last;
-  res.json({ name: `${req.query.first} ${lastName}` });
+  res.json({ name: `${req.query.first} ${req.query.first}` });
 });
 
 //notice can't do __dirname + '/views/index.html' must do '/views/' + 'index.html'
