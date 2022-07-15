@@ -1,3 +1,3 @@
-# Basic Node and Express
+# Quality Assurance with Chai
 
-This is the boilerplate code for the Basic Node and Express Challenges. Instructions for working on these challenges start at https://www.freecodecamp.org/learn/apis-and-microservices/basic-node-and-express/
+This is the boilerplate for the Quality Assurance with Chai lessons. Instructions for completing these lessons start at https://www.freecodecamp.org/learn/quality-assurance/quality-assurance-and-testing-with-chai/
